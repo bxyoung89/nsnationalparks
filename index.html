@@ -3,12 +3,26 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>National Parks!</title>
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+					integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+					crossorigin=""/>
 		<link rel="stylesheet" href="./src/main.css" />
+		<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+						integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+						crossorigin=""></script>
 	</head>
 	<body>
 		<header>
 			<div class="title">
 				Youngs' National Park Explorer
+			</div>
+			<div class="view-buttons">
+				<button class="view-button" onclick="changeResultsMode('map')" id="map-view-button" disabled>
+					<img src="./images/map%20icon.png">
+				</button>
+				<button class="view-button" onclick="changeResultsMode('list')" id="list-view-button">
+					<img src="./images/hamburger%20icon.png">
+				</button>
 			</div>
 		</header>
 		<div class="controls">
@@ -18,7 +32,10 @@
 				<label for="hide-visited">Hide visited parks</label>
 			</div>
 		</div>
-		<div class="results" id="results">
+		<div class="results" id="results" style="display:none">
+
+		</div>
+		<div class="map-results" id="map-results">
 
 		</div>
 		<script src="./src/main.js" type="module" ></script>
