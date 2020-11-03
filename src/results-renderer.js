@@ -1,15 +1,15 @@
 import {getState} from "./state-manager.js";
+import allParks from './data/parks.js';
 import getDomFromString from './get-dom-from-string.js';
 
 const DIV_ID = 'results';
 
-const renderResults = () => {
+
+const initialRender = () => {
 	const resultsDiv = document.getElementById(DIV_ID);
-	resultsDiv.innerHTML = '';
-	const {parks} = getState();
-	parks.forEach(park => {
+	allParks.forEach(park => {
 		const elementString = `
-			<div class="park">
+			<div class="park" data-park-id="${park.id}">
 				<div class="park-image-wrapper">
 					<img src="${park.image}" />
 				</div>
@@ -38,7 +38,20 @@ const renderResults = () => {
 			</div>`;
 		const element = getDomFromString(elementString);
 		resultsDiv.append(element);
+	});
+};
+
+const renderResults = () => {
+	const {parks} = getState();
+	const parkElements = document.querySelectorAll('[data-park-id]');
+	const shownParkIds = parks.map(park => park.id);
+	parkElements.forEach(park => {
+		const id = park.getAttribute('data-park-id');
+		const shouldShow = shownParkIds.includes(id);
+		park.style.display =  shouldShow ? 'flex' : 'none';
 	})
 };
+
+initialRender();
 
 export default renderResults;
