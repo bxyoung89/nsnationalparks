@@ -21,9 +21,6 @@ export default (park) => {
 						<div class="park-phone">
 							Phone #: ${park.phoneNumber}
 						</div>
-						<div class="park-lat-long">
-							${park.latitude}, ${park.longitude}
-						</div>
 					</div>
 				</div>
 			</div>`;

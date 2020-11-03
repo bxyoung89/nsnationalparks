@@ -177,10 +177,6 @@ label {
 	color: #888;
 }
 
-.park-lat-long {
-	color: #888;
-}
-
 #map-results {
 	flex-grow: 1;
 }
@@ -191,12 +187,5 @@ label {
 
 .leaflet-popup-content {
 	width: 500px !important;
-	margin: 0;
-	margin-bottom: -10px;
-}
-
-@media only screen and (max-width: 500px) {
-	/*header {*/
-	/*	background: red;*/
-	/*}*/
+	margin: 0 0 -10px;
 }
