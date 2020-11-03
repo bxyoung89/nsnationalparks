@@ -1,13 +1,37 @@
-import {getState} from "./state-manager.js";
-import allParks from './data/parks.js';
+import {getState, updateParksBasedOnState} from "./state-manager.js";
+import {getAllParks, setAllParks} from './data/all-parks.js';
 import getDomFromString from './get-dom-from-string.js';
+import {writeToBin} from './json-management.js';
 
 const DIV_ID = 'results';
 
+window.markAsVisited = (id) => {
+	const {jsonBinData} = getState();
+	const newJSONBinData = [
+		...jsonBinData,
+		{
+			id,
+			time: (new Date()).toISOString()
+		}
+	];
+	writeToBin(newJSONBinData).then(() => {
+		const allParks = getAllParks();
+		setAllParks(allParks.map(park => {
+			if(park.id !== id){
+				return park;
+			}
+			return {
+				...park,
+				visited: true,
+			};
+		}))
+		updateParksBasedOnState({});
+	});
+};
 
 const initialRender = () => {
 	const resultsDiv = document.getElementById(DIV_ID);
-	allParks.forEach(park => {
+	getAllParks().forEach(park => {
 		const elementString = `
 			<div class="park" data-park-id="${park.id}">
 				<div class="park-image-wrapper">
@@ -20,7 +44,7 @@ const initialRender = () => {
 					<div class="park-description">
 						${park.description}
 					</div>
-					<button class="mark-visited-button" onclick="alert('not working yet')">
+					<button class="mark-visited-button" onclick="markAsVisited('${park.id}')" data-mark-visited-button-id="${park.id}">
 						Mark visited!
 					</button>
 					<div class="park-info">
@@ -49,7 +73,15 @@ const renderResults = () => {
 		const id = park.getAttribute('data-park-id');
 		const shouldShow = shownParkIds.includes(id);
 		park.style.display =  shouldShow ? 'flex' : 'none';
-	})
+	});
+
+	const markVisitedButtons = document.querySelectorAll('[data-mark-visited-button-id]');
+	const visitedIds = getAllParks().filter(park => park.visited).map(park => park.id);
+	markVisitedButtons.forEach(button => {
+		const id = button.getAttribute('data-mark-visited-button-id');
+		const visited = visitedIds.includes(id);
+		button.disabled = visited;
+	});
 };
 
 initialRender();

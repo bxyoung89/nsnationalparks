@@ -1,0 +1,2 @@
+export const readFromBin = () => window.fetch('https://api.jsonbin.io/b/5fa0bb4fa03d4a3bab0bbafb');
+export const writeToBin = (jsonToWrite) =>  window.fetch('https://api.jsonbin.io/b/5fa0bb4fa03d4a3bab0bbafb', {method: 'PUT', body: jsonToWrite});

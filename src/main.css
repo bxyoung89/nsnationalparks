@@ -104,6 +104,15 @@ label {
 	opacity: 0.75;
 }
 
+.mark-visited-button:disabled {
+	opacity: 0.5;
+	cursor: default;
+}
+
+.mark-visited-button:disabled:hover {
+	opacity: 0.5;
+}
+
 .park-info {
 	display: flex;
 	align-items: center;
