@@ -43,9 +43,18 @@ header {
 	height: 40px;
 	width: 40px;
 	padding: 5px;
-	border: 0;
 	background: transparent;
 	cursor: pointer;
+	border: 1px solid #fff;
+}
+
+.view-button:first-child {
+	border-radius: 4px 0 0 4px;
+}
+
+.view-button:last-child {
+
+	border-radius: 0 4px 4px 0;
 }
 
 .view-button img {
@@ -53,18 +62,17 @@ header {
 	width: 100%;
 	object-fit: contain;
 	transition: all 300ms ease;
+	filter: invert(100%);
 }
 
-.view-button:hover img {
-	filter: invert(50%);
+.view-button:hover {
+	background: #3F4122;
 }
 
+.view-button:disabled:hover,
 .view-button:disabled {
 	cursor: default;
-}
-.view-button:hover:disabled img,
-.view-button:disabled img {
-	filter: invert(100%);
+	background: #536F16;
 }
 
 .controls {
