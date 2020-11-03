@@ -17,6 +17,7 @@ body {
 	background: #3F4122;
 	font-family: sans-serif;
 	height: 100%;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 }
@@ -174,8 +175,6 @@ label {
 
 #map-results {
 	flex-grow: 1;
-	/*height: 100%;*/
-	/*height: 400px;*/
 }
 
 .leaflet-popup-content-wrapper, .leaflet-popup-tip {
@@ -186,4 +185,10 @@ label {
 	width: 500px !important;
 	margin: 0;
 	margin-bottom: -10px;
+}
+
+@media only screen and (max-width: 500px) {
+	/*header {*/
+	/*	background: red;*/
+	/*}*/
 }
