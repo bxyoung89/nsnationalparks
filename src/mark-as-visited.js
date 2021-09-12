@@ -1,6 +1,6 @@
-import {getState, updateParksBasedOnState} from "./state-manager.js";
-import {getAllParks, setAllParks} from './data/all-parks.js';
+import {getState } from "./state-manager.js";
 import {writeToBin} from './json-management.js';
+import updateStateBasedOnBin from "./update-state-based-on-bin.js";
 
 window.markAsVisited = (id) => {
 	const {jsonBinData} = getState();
@@ -12,16 +12,6 @@ window.markAsVisited = (id) => {
 		}
 	];
 	writeToBin(newJSONBinData).then(() => {
-		const allParks = getAllParks();
-		setAllParks(allParks.map(park => {
-			if(park.id !== id){
-				return park;
-			}
-			return {
-				...park,
-				visited: true,
-			};
-		}))
-		updateParksBasedOnState({});
+		updateStateBasedOnBin();
 	});
 };
